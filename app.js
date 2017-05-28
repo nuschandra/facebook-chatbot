@@ -4,7 +4,7 @@ var https=require('https')
 var port=3000
 var fs=require('fs')
 
-app.get('/webhook',function(req,res){
+app.get('/',function(req,res){
 	if (req.query['hub.mode'] === 'subscribe' &&
 		req.query['hub.verify_token'] === 'this_is_fun') {
 		console.log("Validating webhook");
