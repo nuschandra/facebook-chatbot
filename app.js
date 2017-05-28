@@ -14,11 +14,7 @@ app.get('/webhook',function(req,res){
 	res.send('Hello World!')
 })
 
-var httpsOptions={
-	key:fs.readFileSync('./server.key'),
-	cert:fs.readFileSync('./server.crt')
-}
 
-var server=https.createServer(httpsOptions,app).listen(port,function(){
+app.listen(port,function(){
 	console.log('Example app listening on port 3000!')
 })
