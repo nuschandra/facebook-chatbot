@@ -5,12 +5,6 @@ var port=3000
 var fs=require('fs')
 
 app.get('/webhook',function(req,res){
-	console.log(req.query['hub.verify_token'])
-	if (req.query['hub.verify_token'] === 'funstuff') {
-      res.send(req.query['hub.challenge']);
-    } else {
-      res.send('Error, wrong validation token');    
-    }
 	res.send('Hello World!')
 })
 
