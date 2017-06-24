@@ -45,6 +45,6 @@ function receivedMessage(event){
 	console.log("Message data:",event.message);
 }
 
-app.listen(process.env.PORT,function(){
+app.listen(3000,function(){
 	console.log('Example app listening on port 3000!')
 })
