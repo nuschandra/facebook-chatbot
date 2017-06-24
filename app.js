@@ -1,8 +1,8 @@
-var express=require('express')
-var app=express()
-var https=require('https')
-var port=3000
-var fs=require('fs')
+var express=require('express');
+var app=express();
+var https=require('https');
+var port=3000;
+var fs=require('fs');
 
 app.get('/',function(req,res){
 	if (req.query['hub.mode'] === 'subscribe' &&
@@ -13,10 +13,11 @@ app.get('/',function(req,res){
 		console.error("Failed validation. Make sure the validation tokens match.");
     	res.sendStatus(403);          
   	}  
-  	res.send('Hello World!')
-})
+  	res.send('Hello World!');
+});
 
 app.post('/webhook',function(req,res){
+	console.log(req.body);
 	var data=req.body;
 	console.log("Hi hello");
 	if (data.object === 'page'){
