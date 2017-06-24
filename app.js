@@ -40,3 +40,7 @@ app.post('/webhook',function(req,res){
 function receivedMessage(event){
 	console.log("Message data:",event.message);
 }
+
+app.listen(process.env.PORT,function(){
+	console.log('Example app listening on port 3000!')
+})
