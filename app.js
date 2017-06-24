@@ -16,7 +16,27 @@ app.get('/',function(req,res){
   	res.send('Hello World!')
 })
 
+app.post('/webhook',function(req,res){
+	var data=req.body;
 
-app.listen(process.env.PORT,function(){
-	console.log('Example app listening on port 3000!')
-})
+	if (data.object === 'page'){
+
+		data.entry.forEach(function(entry){
+			var pageID=entry.id;
+			var timeOfEvent=entry.time;
+
+			entry.messaging.forEach(function(event){
+				if(event.message){
+					receivedMessage(event);
+				}else{
+					console.log("Webhook received unknown event:",event);
+				}
+			});
+		});
+		res.sendStatus(200);
+	}
+});
+
+function receivedMessage(event){
+	console.log("Message data:",event.message);
+}
