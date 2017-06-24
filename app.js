@@ -1,8 +1,11 @@
 var express=require('express');
+var bodyParser=require('body-parser');
 var app=express();
 var https=require('https');
 var port=3000;
 var fs=require('fs');
+
+app.use(express.bodyParser());
 
 app.get('/',function(req,res){
 	if (req.query['hub.mode'] === 'subscribe' &&
