@@ -5,7 +5,7 @@ var https=require('https');
 var port=3000;
 var fs=require('fs');
 
-app.use(express.bodyParser());
+app.use(bodyParser.json());
 
 app.get('/',function(req,res){
 	if (req.query['hub.mode'] === 'subscribe' &&
