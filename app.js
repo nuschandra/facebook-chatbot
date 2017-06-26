@@ -73,7 +73,7 @@ function receivedMessage(event){
 }
 
 function sendTextMessage(senderID,messageText){
-	console.log(senderID,messageText);
+	console.log(senderID,messageText,recipientID);
 }
 app.listen(process.env.PORT,function(){
 	console.log('Example app listening on port 3000!')
