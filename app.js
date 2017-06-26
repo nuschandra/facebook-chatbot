@@ -59,10 +59,20 @@ function receivedMessage(event){
 
 	console.log(messageId,message.text,message.attachments);
 	if(messageText){
-		console.log("Hi");
+		case 'generic':
+			sendGenericMessage(senderID);
+			break;
+
+		default:
+			sendTextMessage(senderID,messageText);
+	}else if(messageAttachments){
+		sendTextMessage(senderID,"Message with attachments received");
 	}
 }
 
+function sendTextMessage(senderID,messageText){
+	console.log(senderID,messageText);
+}
 app.listen(process.env.PORT,function(){
 	console.log('Example app listening on port 3000!')
 });
