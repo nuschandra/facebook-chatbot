@@ -43,7 +43,24 @@ app.post('/webhook',function(req,res){
 });
 
 function receivedMessage(event){
-	console.log("Message data:",event.message);
+	var senderID=event.sender.id;
+	var recipientID=event.recipient.id;
+	var timeOfMessage=event.timestamp;
+	var message=event.message;
+
+	console.log("Received message from %d user and %d page at %d time",senderID,recipientID,
+		timeOfMessage);
+
+	console.log(JSON.stringify(message));
+
+	var messageId=message.mid;
+	var messageText=message.text;
+	var messageAttachments=message.attachments;
+
+	console.log(messageId,message.text,message.attachments);
+	if(messageText){
+		console.log("Hi");
+	}
 }
 
 app.listen(process.env.PORT,function(){
