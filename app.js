@@ -59,12 +59,14 @@ function receivedMessage(event){
 
 	console.log(messageId,message.text,message.attachments);
 	if(messageText){
-		case 'generic':
-			sendGenericMessage(senderID);
-			break;
+		switch(messageText){
+			case 'generic':
+				sendGenericMessage(senderID);
+				break;
 
-		default:
-			sendTextMessage(senderID,messageText);
+			default:
+				sendTextMessage(senderID,messageText);
+		}
 	}else if(messageAttachments){
 		sendTextMessage(senderID,"Message with attachments received");
 	}
