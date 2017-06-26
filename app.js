@@ -72,8 +72,37 @@ function receivedMessage(event){
 	}
 }
 
-function sendTextMessage(senderID,messageText){
-	console.log(senderID,messageText,recipientID);
+function sendTextMessage(recipientID,messageText){
+	var messageData={
+		recipient:{
+			id:recipientID
+		},
+		message:{
+			text:messageText
+		}
+	};
+
+	callSendAPI(messageData);
+}
+
+function callSendAPI(messageData){
+	request({
+		uri:'https://graph.facebook.com/v2.6/me/messages',
+		qs:{accessToken:'EAAShs2WgQs4BAIk1OwthgnlCKb7G9UUpFuCHJFFTdLtx0ZArJqdYmERrymWrZAqyd5ThSQHZBqCQdZBKMwwDdKnhb1pLeoTNpTy4bzgjrioECjX1WCi5urA8NURFXL9M4u8KxZA8CIB058me89MlZBCkO0ZAT6GAdbRNfcm6WL86gZDZD'},
+		method:'POST',
+		json:messageData
+	},function(error,response,body){
+		if(!error && response.statusCode==200){
+			var recipientID=body.recipientID;
+			var messageID=body.messageID;
+			console.log("Successfully sent message with id %s to recipient %s",messageID,recipientID);
+		}
+		else{
+			console.error("Unable to send message");
+			console.error(response);
+			console.error(error);
+		}
+	});
 }
 app.listen(process.env.PORT,function(){
 	console.log('Example app listening on port 3000!')
