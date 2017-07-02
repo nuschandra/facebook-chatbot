@@ -87,7 +87,7 @@ function sendTextMessage(recipientID,messageText){
 	},messageText);
 }
 
-function getUpcomingMatches(upcomingMatchesData){
+function getUpcomingMatches(callback,messageText){
 	var upcomingMatchesData={
 		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
 	};
