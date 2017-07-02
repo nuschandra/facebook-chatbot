@@ -95,8 +95,8 @@ function getUpcomingMatches(callback,messageText){
 	},function(error,response,body){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
-			var teamOne=body.matches[0].team-1;
-			var teamTwo=body.matches[0].team-2;
+			var teamOne=body.matches[0]."team-1";
+			var teamTwo=body.matches[0]."team-2";
 			callback(teamOne+" V "+teamTwo);
 			console.log(teamOne);
 			console.log(teamTwo);
