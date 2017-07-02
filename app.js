@@ -93,6 +93,7 @@ function callSendAPI(messageData){
 		method:'POST',
 		json:messageData
 	},function(error,response,body){
+		console.log(body);
 		if(!error && response.statusCode==200){
 			var recipientID=body.recipientID;
 			var messageID=body.messageID;
