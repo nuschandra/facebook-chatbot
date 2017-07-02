@@ -74,6 +74,10 @@ function receivedMessage(event){
 }
 
 function sendTextMessage(recipientID,messageText){
+	var upcomingMatchesData={
+		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
+	};
+	getUpcomingMatches(upcomingMatchesData);
 	var messageData={
 		recipient:{
 			id:recipientID
@@ -86,6 +90,23 @@ function sendTextMessage(recipientID,messageText){
 	callSendAPI(messageData);
 }
 
+function getUpcomingMatches(upcomingMatchesData){
+	request({
+		uri:'http://cricapi.com/api/matches',
+		method:'POST',
+		json:upcomingMatchesData
+	},function(error,response,body){
+		console.log(body);
+		if(!error && response.statusCode==200){
+			console.log("Successfully retrieved upcoming matches");
+		}
+		else{
+			console.error("Unable to retrieve list of upcoming matches");
+			console.error(response);
+			console.error(error);
+		}
+	});
+}
 function callSendAPI(messageData){
 	request({
 		uri:'https://graph.facebook.com/v2.6/me/messages',
@@ -106,6 +127,7 @@ function callSendAPI(messageData){
 		}
 	});
 }
+
 app.listen(process.env.PORT,function(){
 	console.log('Example app listening on port 3000!')
 });
