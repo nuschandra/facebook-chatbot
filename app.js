@@ -74,30 +74,33 @@ function receivedMessage(event){
 }
 
 function sendTextMessage(recipientID,messageText){
-	var upcomingMatchesData={
-		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
-	};
-	getUpcomingMatches(upcomingMatchesData);
-	var messageData={
-		recipient:{
-			id:recipientID
-		},
-		message:{
-			text:messageText
-		}
-	};
-
-	callSendAPI(messageData);
+	getUpcomingMatches(function(message){
+		var messageData={
+			recipient:{
+				id:recipientID
+			},
+			message:{
+				text:messageText
+			}
+		};
+		callSendAPI(messageData);
+	},messageText);
 }
 
 function getUpcomingMatches(upcomingMatchesData){
+	var upcomingMatchesData={
+		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
+	};
 	request({
 		uri:'http://cricapi.com/api/matches',
 		method:'POST',
 		json:upcomingMatchesData
 	},function(error,response,body){
-		console.log(body.matches[0].unique_id);
+		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
+			var teamOne=body.matches[0].team-1;
+			var teamTwo=body.matches[0].team-2;
+			callback(teamOne+" V "+teamTwo);
 			console.log("Successfully retrieved upcoming matches");
 		}
 		else{
