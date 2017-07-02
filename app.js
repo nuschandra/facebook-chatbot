@@ -77,10 +77,10 @@ function sendTextMessage(recipientID,messageText){
 				id:recipientID
 			},
 			message:{
-				text:messageText
+				text:message
 			}
 		};
-		callSendAPI(message);
+		callSendAPI(messageData);
 	},messageText);
 }
 
