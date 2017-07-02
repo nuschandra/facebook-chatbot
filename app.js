@@ -96,7 +96,7 @@ function getUpcomingMatches(upcomingMatchesData){
 		method:'POST',
 		json:upcomingMatchesData
 	},function(error,response,body){
-		console.log(body);
+		console.log(body.matches.length);
 		if(!error && response.statusCode==200){
 			console.log("Successfully retrieved upcoming matches");
 		}
