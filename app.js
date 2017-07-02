@@ -21,9 +21,7 @@ app.get('/',function(req,res){
 });
 
 app.post('/webhook',function(req,res){
-	console.log(req.body);
 	var data=req.body;
-	console.log("Hi hello");
 	if (data.object === 'page'){
 
 		data.entry.forEach(function(entry){
@@ -31,7 +29,6 @@ app.post('/webhook',function(req,res){
 			var timeOfEvent=entry.time;
 
 			entry.messaging.forEach(function(event){
-				console.log(entry.messaging);
 				if(event.message){
 					receivedMessage(event);
 				}else{
@@ -83,7 +80,7 @@ function sendTextMessage(recipientID,messageText){
 				text:messageText
 			}
 		};
-		callSendAPI(messageData);
+		callSendAPI(message);
 	},messageText);
 }
 
@@ -101,6 +98,8 @@ function getUpcomingMatches(callback,messageText){
 			var teamOne=body.matches[0].team-1;
 			var teamTwo=body.matches[0].team-2;
 			callback(teamOne+" V "+teamTwo);
+			console.log(teamOne);
+			console.log(teamTwo);
 			console.log("Successfully retrieved upcoming matches");
 		}
 		else{
