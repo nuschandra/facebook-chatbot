@@ -171,7 +171,7 @@ function getCurrentMatches(callback){
 			console.log(today);
 			var matches=body.data;
 			var currentMatches=matches.filter(function(match){
-				return (match.date===today);
+				return (match.date==='10 July 2017');
 			});
 			var matchesWithNoId=currentMatches.filter(function(match){
 				return (match.unique_id.indexOf('will generate') > -1);
