@@ -85,7 +85,7 @@ function sendGenericMessage(recipientID){
 					elements:[{
 						title:"England vs South Africa",
 						subtitle:"1st Test - Day 4",
-						image_url:"https://evening-beyond-91501.herokuapp.com/Images/EngSaf.png",
+						image_url:"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSaf.png",
 						buttons:[{
 							type:"postback",
 							title:"Get Scores",
