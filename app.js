@@ -191,10 +191,10 @@ function getCurrentMatches(callback){
 function getUniqueId(matchesWithNoId){
 	getUpcomingMatches(function(matches){
 		matchesWithNoId.forEach(function(match){
-			var versusString=matchesWithNoId.name.indexOf(' v ');
-			var atString=matchesWithNoId.name.indexOf(' at ');
-			var teamOne=matchesWithNoId.name.slice(0,versusString);
-			var teamTwo=matchesWithNoId.name.slice(versusString+3,atString)
+			var versusString=match.name.indexOf(' v ');
+			var atString=match.name.indexOf(' at ');
+			var teamOne=match.name.slice(0,versusString);
+			var teamTwo=match.name.slice(versusString+3,atString)
 			var filterMatches=matches.filter(function(match){
 				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
