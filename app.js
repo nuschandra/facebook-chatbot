@@ -5,6 +5,8 @@ var https=require('https');
 var request=require('request');
 var port=3000;
 var fs=require('fs');
+var moment=require('moment');
+require('moment/locale/en-gb')
 
 app.use(bodyParser.json());
 
@@ -73,30 +75,33 @@ function receivedMessage(event){
 }
 
 function sendGenericMessage(recipientID){
-	var messageData={
-		recipient:{
-			id:recipientID
-		},
-		message:{
-			attachment:{
-				type:"template",
-				payload:{
-					template_type:"generic",
-					elements:[{
-						title:"England vs South Africa",
-						subtitle:"1st Test - Day 4",
-						image_url:"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSaf.png",
-						buttons:[{
-							type:"postback",
-							title:"Get Scores",
-							payload:"GET_SCORES_PAYLOAD"
+	getCurrentMatches(function(message){
+		var messageData={
+			recipient:{
+				id:recipientID
+			},
+			message:{
+				attachment:{
+					type:"template",
+					payload:{
+						template_type:"generic",
+						elements:[{
+							title:"England vs South Africa",
+							subtitle:"1st Test - Day 4",
+							image_url:"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSaf.png",
+							buttons:[{
+								type:"postback",
+								title:"Get Scores",
+								payload:"GET_SCORES_PAYLOAD"
+							}]
 						}]
-					}]
+					}
 				}
 			}
-		}
-	};
-	callSendAPI(messageData);
+		};
+		callSendAPI(messageData);
+	})
+	
 }
 function sendReply(recipientID,messageText){
 	var messageData={
@@ -143,6 +148,30 @@ function getUpcomingMatches(callback,messageText){
 		}
 		else{
 			console.error("Unable to retrieve list of upcoming matches");
+			console.error(response);
+			console.error(error);
+		}
+	});
+}
+
+function getCurrentMatches(callback,messageText){
+	var currentMatchesData={
+		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
+	};
+	request({
+		uri:'http://cricapi.com/api/matchCalendar',
+		method:'POST',
+		json:currentMatchesData
+	},function(error,response,body){
+		//console.log(body.matches[0].unique_id);
+		if(!error && response.statusCode==200){
+			var today=moment().format('LL');
+			var matches=body.data;
+			console.log(matches);
+			callback(matches);
+		}
+		else{
+			console.error("Unable to retrieve current matches");
 			console.error(response);
 			console.error(error);
 		}
