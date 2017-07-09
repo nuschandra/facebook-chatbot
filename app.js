@@ -95,7 +95,8 @@ function sendGenericMessage(recipientID){
 				}
 			}
 		}
-	}
+	};
+	callSendAPI(messageData);
 }
 function sendReply(recipientID,messageText){
 	var messageData={
