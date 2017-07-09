@@ -77,7 +77,7 @@ function sendReply(recipientID,messageText){
 				id:recipientID
 			},
 			message:{
-				text:message
+				text:messageText
 			}
 	};
 	callSendAPI(messageData);
