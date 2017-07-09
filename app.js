@@ -177,10 +177,12 @@ function getCurrentMatches(callback){
 				return (match.unique_id.indexOf('will generate') > -1);
 			});
 			console.log(matchesWithNoId);
-			var newMatches=getUniqueId(matchesWithNoId);
+			getUniqueId(function(matchesWithNoId){
+				console.log(matchesWithNoId);
+			});
 			//console.log(matches);
 			//console.log(matches)
-			console.log(newMatches);
+			//console.log(newMatches);
 			callback(matches);
 		}
 		else{
@@ -191,22 +193,21 @@ function getCurrentMatches(callback){
 	});
 }
 
-function getUniqueId(matchesWithNoId){
+function getUniqueId(callback,matchesWithNoId){
 	getUpcomingMatches(function(matches){
-		matchesWithNoId.forEach(function(matchesWithNoId){
-			var versusString=matchesWithNoId.name.indexOf(' v ');
-			var atString=matchesWithNoId.name.indexOf(' at ');
-			var teamOne=matchesWithNoId.name.slice(0,versusString);
-			var teamTwo=matchesWithNoId.name.slice(versusString+3,atString)
-			var filterMatches=matches.filter(function(matchesWithNoId){
-				return ((matchesWithNoId["team-1"]===teamOne || matchesWithNoId["team-1"]===teamTwo) && (matchesWithNoId["team-2"]===teamOne || matchesWithNoId["team-2"]===teamTwo));
+		matchesWithNoId.forEach(function(match){
+			var versusString=match.name.indexOf(' v ');
+			var atString=match.name.indexOf(' at ');
+			var teamOne=match.name.slice(0,versusString);
+			var teamTwo=match.name.slice(versusString+3,atString)
+			var filterMatches=matches.filter(function(match){
+				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
 			console.log(filterMatches);
 			console.log(filterMatches[0].unique_id);
-			matchesWithNoId.unique_id=filterMatches[0].unique_id;
+			match.unique_id=filterMatches[0].unique_id;
 		});
-		console.log(matchesWithNoId);
-		return matchesWithNoId;
+		callback(matches);
 	});
 }
 
