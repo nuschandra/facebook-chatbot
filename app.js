@@ -177,7 +177,7 @@ function getCurrentMatches(callback){
 			if(matchesWithNoId)
 			getUniqueId(matchesWithNoId);
 			//console.log(matches);
-			console.log(matches)
+			//console.log(matches)
 			callback(matches);
 		}
 		else{
