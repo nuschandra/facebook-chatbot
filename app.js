@@ -125,10 +125,10 @@ function sendTextMessage(recipientID,messageText){
 			}
 		};
 		callSendAPI(messageData);
-	},messageText);
+	});
 }
 
-function getUpcomingMatches(callback,messageText){
+function getUpcomingMatches(callback){
 	var upcomingMatchesData={
 		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
 	};
@@ -141,9 +141,9 @@ function getUpcomingMatches(callback,messageText){
 		if(!error && response.statusCode==200){
 			var teamOne=body.matches[0]["team-1"];
 			var teamTwo=body.matches[0]["team-2"];
-			callback(teamOne+" V "+teamTwo);
-			console.log(teamOne);
-			console.log(teamTwo);
+			callback(body.matches);
+			//console.log(teamOne);
+			//console.log(teamTwo);
 			console.log("Successfully retrieved upcoming matches");
 		}
 		else{
@@ -153,7 +153,7 @@ function getUpcomingMatches(callback,messageText){
 		}
 	});
 }
-
+//&& match.unique_id.indexOf('will generate') < 0
 function getCurrentMatches(callback){
 	var currentMatchesData={
 		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
@@ -168,10 +168,14 @@ function getCurrentMatches(callback){
 			var today=moment().format('LL');
 			var matches=body.data;
 			var currentMatches=matches.filter(function(match){
-				return (match.date===today && match.unique_id.indexOf('will generate') < 0);
+				return (match.date===today);
 			});
+			var matchesWithNoId=currentMatches.filter(function(match){
+				return (match.unique_id.indexOf('will generate') < 0);
+			});
+			getUniqueId(matchesWithNoId);
 			//console.log(matches);
-			console.log(currentMatches)
+			console.log(matches)
 			callback(matches);
 		}
 		else{
@@ -181,6 +185,24 @@ function getCurrentMatches(callback){
 		}
 	});
 }
+
+function getUniqueId(matchesWithNoId){
+	getUpcomingMatches(function(matches){
+		matchesWithNoId.forEach(function(match){
+			var versusString=matchesWithNoId.name.indexOf(' v ');
+			var atString=matchesWithNoId.name.indexOf(' at ');
+			var teamOne=matchesWithNoId.name.slice(0,versusString);
+			var teamTwo=matchesWithNoId.name.slice(versusString+3,atString)
+			var filterMatches=matches.filter(function(match){
+				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
+			});
+			console.log(filterMatches);
+			console.log(filterMatches.unique_id);
+		});
+	});
+}
+
+
 function callSendAPI(messageData){
 	request({
 		uri:'https://graph.facebook.com/v2.6/me/messages',
@@ -217,6 +239,7 @@ function receivedPostback(event){
 	}
 
 }
+
 app.listen(process.env.PORT,function(){
 	console.log('Example app listening on port 3000!')
 });
