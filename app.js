@@ -149,7 +149,9 @@ function receivedPostback(event){
 
 	var payload=event.postback.payload;
 	console.log("Received postback for user %d and page %d with payload '%s'",senderID,recipientID,payload);
-	sendReply(senderID,"Welcome to TestSports! Select an option from the below menu.")
+	if(payload==='GET_STARTED_PAYLOAD'){
+		sendReply(senderID,"Welcome to TestSports! Select an option from the below menu.");
+	}
 
 }
 app.listen(process.env.PORT,function(){
