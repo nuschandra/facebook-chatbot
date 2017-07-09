@@ -167,7 +167,11 @@ function getCurrentMatches(callback){
 		if(!error && response.statusCode==200){
 			var today=moment().format('LL');
 			var matches=body.data;
-			console.log(matches);
+			var currentMatches=matches.filter(function(match){
+				return (match.date===today);
+			});
+			//console.log(matches);
+			console.log(currentMatches)
 			callback(matches);
 		}
 		else{
