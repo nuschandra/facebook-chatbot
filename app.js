@@ -177,9 +177,9 @@ function getCurrentMatches(callback){
 				return (match.unique_id.indexOf('will generate') > -1);
 			});
 			console.log(matchesWithNoId);
-			getUniqueId(function(matchesWithNoId){
-				console.log(matchesWithNoId);
-			});
+			getUniqueId(function(newMatches){
+				console.log(newMatches);
+			},matchesWithNoId);
 			//console.log(matches);
 			//console.log(matches)
 			//console.log(newMatches);
