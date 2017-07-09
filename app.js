@@ -207,7 +207,7 @@ function getUniqueId(callback,matchesWithNoId){
 			console.log(filterMatches[0].unique_id);
 			match.unique_id=filterMatches[0].unique_id;
 		});
-		callback(match);
+		callback(matchesWithNoId);
 	});
 }
 
