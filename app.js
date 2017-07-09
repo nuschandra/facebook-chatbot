@@ -165,14 +165,14 @@ function getCurrentMatches(callback){
 	},function(error,response,body){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
-			var today=moment.utc().format('LL');
+			var today=moment().format('LL');
 			console.log(today);
 			var matches=body.data;
 			var currentMatches=matches.filter(function(match){
 				return (match.date===today);
 			});
 			var matchesWithNoId=currentMatches.filter(function(match){
-				return (match.unique_id.indexOf('will generate') < 0);
+				return (match.unique_id.indexOf('will generate') > -1);
 			});
 			console.log(matchesWithNoId);
 			getUniqueId(matchesWithNoId);
