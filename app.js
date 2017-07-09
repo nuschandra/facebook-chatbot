@@ -154,7 +154,7 @@ function getUpcomingMatches(callback,messageText){
 	});
 }
 
-function getCurrentMatches(callback,messageText){
+function getCurrentMatches(callback){
 	var currentMatchesData={
 		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
 	};
