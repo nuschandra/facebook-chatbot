@@ -71,6 +71,32 @@ function receivedMessage(event){
 		sendTextMessage(senderID,"Message with attachments received");
 	}
 }
+
+function sendGenericMessage(recipientID){
+	var messageData={
+		recipient:{
+			id:recipientID
+		},
+		message:{
+			attachment:{
+				type:"template",
+				payload:{
+					template_type:"generic",
+					elements:[{
+						title:"England vs South Africa",
+						subtitle:"1st Test - Day 4",
+						image_url:"https://evening-beyond-91501.herokuapp.com/Images/EngSaf.png",
+						buttons:[{
+							type:"postback",
+							title:"Get Scores",
+							payload:"GET_SCORES_PAYLOAD"
+						}]
+					}]
+				}
+			}
+		}
+	}
+}
 function sendReply(recipientID,messageText){
 	var messageData={
 			recipient:{
@@ -151,6 +177,9 @@ function receivedPostback(event){
 	console.log("Received postback for user %d and page %d with payload '%s'",senderID,recipientID,payload);
 	if(payload==='GET_STARTED_PAYLOAD'){
 		sendReply(senderID,"Welcome to TestSports! Select an option from the below menu.");
+	}
+	if(payload==='CURRENT_INTERNATIONAL_PAYLOAD'){
+		sendGenericMessage(senderID);
 	}
 
 }
