@@ -87,6 +87,7 @@ function sendGenericMessage(recipientID){
 						template_type:"generic",
 						elements:[{
 							title:"England vs South Africa",
+							subtitle:"1st Test - Day 4",
 							image_url:"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSaf.png",
 							buttons:[{
 								type:"postback",
@@ -164,7 +165,8 @@ function getCurrentMatches(callback){
 	},function(error,response,body){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
-			var today=moment().format('LL');
+			var today=moment.utc().format('LL');
+			console.log(today);
 			var matches=body.data;
 			var currentMatches=matches.filter(function(match){
 				return (match.date===today);
