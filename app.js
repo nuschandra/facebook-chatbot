@@ -174,7 +174,7 @@ function getCurrentMatches(callback){
 			var matchesWithNoId=currentMatches.filter(function(match){
 				return (match.unique_id.indexOf('will generate') < 0);
 			});
-			if(matchesWithNoId)
+			console.log(matchesWithNoId);
 			getUniqueId(matchesWithNoId);
 			//console.log(matches);
 			//console.log(matches)
