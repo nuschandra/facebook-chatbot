@@ -177,10 +177,10 @@ function getCurrentMatches(callback){
 				return (match.unique_id.indexOf('will generate') > -1);
 			});
 			console.log(matchesWithNoId);
-			matchesWithNoId=getUniqueId(matchesWithNoId);
+			var newMatches=getUniqueId(matchesWithNoId);
 			//console.log(matches);
 			//console.log(matches)
-			console.log(matchesWithNoId);
+			console.log(newMatches);
 			callback(matches);
 		}
 		else{
