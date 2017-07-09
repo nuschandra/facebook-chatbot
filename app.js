@@ -31,6 +31,8 @@ app.post('/webhook',function(req,res){
 			entry.messaging.forEach(function(event){
 				if(event.message){
 					receivedMessage(event);
+				}else if (event.postback) {
+					receivedPostback(event);
 				}else{
 					console.log("Webhook received unknown event:",event);
 				}
@@ -69,7 +71,17 @@ function receivedMessage(event){
 		sendTextMessage(senderID,"Message with attachments received");
 	}
 }
-
+function sendReply(recipientID,messageText){
+	var messageData={
+			recipient:{
+				id:recipientID
+			},
+			message:{
+				text:message
+			}
+	};
+	callSendAPI(messageData);
+}
 function sendTextMessage(recipientID,messageText){
 	getUpcomingMatches(function(message){
 		var messageData={
@@ -130,6 +142,16 @@ function callSendAPI(messageData){
 	});
 }
 
+function receivedPostback(event){
+	var senderID=event.sender.id;
+	var recipientID=event.recipient.id;
+	var timeOfPostback=event.timestamp;
+
+	var payload=event.postback.payload;
+	console.log("Received postback for user %d and page %d with payload '%s'",senderID,recipientID,payload);
+	sendReply(senderID,"Welcome to TestSports! Select an option from the below menu.")
+
+}
 app.listen(process.env.PORT,function(){
 	console.log('Example app listening on port 3000!')
 });
