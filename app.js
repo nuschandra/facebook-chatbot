@@ -177,9 +177,10 @@ function getCurrentMatches(callback){
 				return (match.unique_id.indexOf('will generate') > -1);
 			});
 			console.log(matchesWithNoId);
-			getUniqueId(matchesWithNoId);
+			matchesWithNoId=getUniqueId(matchesWithNoId);
 			//console.log(matches);
 			//console.log(matches)
+			console.log(matchesWithNoId);
 			callback(matches);
 		}
 		else{
@@ -201,9 +202,11 @@ function getUniqueId(matchesWithNoId){
 				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
 			console.log(filterMatches);
-			console.log(filterMatches.unique_id);
+			console.log(filterMatches[0].unique_id);
+			match.unique_id=filterMatches[0].unique_id;
 		});
 	});
+	return matchesWithNoId;
 }
 
 
