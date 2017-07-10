@@ -229,11 +229,14 @@ function getUniqueId(callback,matchesWithNoId){
 			//var atString=match.name.indexOf(' at ');
 			//var teamOne=match.name.slice(0,versusString);
 			//var teamTwo=match.name.slice(versusString+3,atString);
+			var teamOne;
+			var teamTwo;
 			getMatchDetails(function(matchDetails){
-				var teamOne=matchDetails.teamOne;
-				var teamTwo=matchDetails.teamTwo;
+				teamOne=matchDetails.teamOne;
+				teamTwo=matchDetails.teamTwo;
 				console.log(teamOne,teamTwo);
 			},match);
+			console.log(teamOne,teamTwo);
 			var filterMatches=matches.filter(function(match){
 				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
