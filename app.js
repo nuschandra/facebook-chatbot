@@ -174,10 +174,10 @@ function getCurrentMatches(callback){
 			var matchesWithId=todayMatches.filter(function(match){
 				return ((match.unique_id.indexOf('will generate') < 0));
 			});
-			console.log(todayMatches);
 			matchesWithId.forEach(function(match){
 				match.matchStarted=true;
 			});
+			console.log(todayMatches);
 			console.log(matchesWithId);
 			var matchesWithNoId=todayMatches.filter(function(match){
 				return (match.unique_id.indexOf('will generate') > -1);
