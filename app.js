@@ -188,12 +188,12 @@ function getCurrentMatches(callback){
 			console.log("MATCHES WITH NO ID - ");
 			console.log(matchesWithNoId);
 			if(matchesWithNoId.length>0){
-				getUniqueId(function(newMatches){
-					console.log(newMatches);
+				getUniqueId(function(todayMatches){
+					console.log(todayMatches);
 				},matchesWithNoId);
 			}
 			console.log(todayMatches);
-			callback(matches);
+			callback(todayMatches);
 		}
 		else{
 			console.error("Unable to retrieve current matches");
