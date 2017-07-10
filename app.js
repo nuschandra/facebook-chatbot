@@ -79,10 +79,20 @@ function sendGenericMessage(recipientID){
 	getCurrentMatches(function(allCurrentMatches){
 		var matchElements=[];
 		allCurrentMatches.forEach(function(match,index){
+			var matchObject={};
 			getMatchDetails(function(matchDetails){
-				matchElements[index].title=matchDetails.matchTitle;
-				matchElements[index].subtitle=matchDetails.seriesInformation+ " at "+matchDetails.venue;
-				matchElements[index].image_url=config.get('image_url.'+matchDetails.matchTitle);
+				matchObject.title=matchDetails.matchTitle;
+				matchObject.subtitle=matchDetails.seriesInformation+ " at "+matchDetails.venue;
+				matchObject.image_url=config.get('image_url.'+matchDetails.matchTitle);
+				var buttons=[];
+				var buttonObject={};
+				buttonObject.type="postback";
+				buttonObject.title="Get Scores";
+				buttonObject.payload="PAYLOAD_"+match.unique_id;
+				buttons.push(buttonObject);
+				matchObject.buttons=buttons;
+				matchElements.push(matchObject);
+				console.log("MATCH ELEMENTS ---------");
 				console.log(matchElements);
 			},match);
 
