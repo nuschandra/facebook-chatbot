@@ -213,10 +213,15 @@ function getUniqueId(callback,matchesWithNoId){
 			var filterMatches=matches.filter(function(match){
 				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
-			console.log(filterMatches);
-			console.log(filterMatches[0].unique_id);
-			match.unique_id=filterMatches[0].unique_id;
-			match.matchStarted=filterMatches[0].matchStarted;
+			if(filterMatches.length>0){
+				console.log(filterMatches);
+				console.log(filterMatches[0].unique_id);
+				match.unique_id=filterMatches[0].unique_id;
+				match.matchStarted=filterMatches[0].matchStarted;
+			}
+			else{
+				match.matchStarted=false;
+			}
 		});
 		callback(matchesWithNoId);
 	});
