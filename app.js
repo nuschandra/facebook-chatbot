@@ -195,12 +195,12 @@ function getCurrentMatches(callback){
 					allCurrentMatches=matchesWithId.concat(newMatches);
 					console.log("ALL CURRENT MATCHES ----- ")
 					console.log(allCurrentMatches);
-
+					callback(allCurrentMatches);
 				},matchesWithNoId);
 			}
-			console.log("ALL CURRENT MATCHES ----- ")
-			console.log(allCurrentMatches);
-			callback(allCurrentMatches);
+			else{
+				callback(allCurrentMatches);
+			}
 		}
 		else{
 			console.error("Unable to retrieve current matches");
@@ -228,11 +228,9 @@ function getUniqueId(callback,matchesWithNoId){
 				match.matchStarted=false;
 			}
 		});
-		
+		callback(matchesWithNoId);
 	});
-	console.log("TESTING A SCENARIO HERE ---------")
-	console.log(matchesWithNoId);
-	callback(matchesWithNoId);
+	
 }
 
 
