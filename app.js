@@ -92,10 +92,6 @@ function sendGenericMessage(recipientID){
 				buttons.push(buttonObject);
 				matchObject.buttons=buttons;
 				matchElements.push(matchObject);
-				console.log("MATCH ELEMENTS ---------");
-				console.log(matchElements);
-				console.log("BUTTON OBJECT -----")
-				console.log(buttons);
 			},match);
 
 		});
@@ -180,11 +176,10 @@ function getCurrentMatches(callback){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
 			var today=moment().format('LL');
-			var tmr='14 July 2017'
 			console.log(today);
 			var matches=body.data;
 			var todayMatches=matches.filter(function(match){
-				return (match.date===today || match.date===tmr);
+				return (match.date===today);
 			});
 			var matchesWithId=todayMatches.filter(function(match){
 				return ((match.unique_id.indexOf('will generate') < 0));
