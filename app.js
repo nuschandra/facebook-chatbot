@@ -177,7 +177,7 @@ function getCurrentMatches(callback){
 		if(!error && response.statusCode==200){
 			var today=moment().format('LL');
 			console.log(today);
-			console.log(moment().locale);
+			console.log(moment.locale());
 			var matches=body.data;
 			var todayMatches=matches.filter(function(match){
 				return (match.date===today);
