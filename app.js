@@ -170,7 +170,7 @@ function getCurrentMatches(callback){
 			console.log(today);
 			var matches=body.data;
 			var todayMatches=matches.filter(function(match){
-				return (match.date===today && match.date===tmr);
+				return (match.date===today || match.date===tmr);
 			});
 			var matchesWithId=todayMatches.filter(function(match){
 				return ((match.unique_id.indexOf('will generate') < 0));
