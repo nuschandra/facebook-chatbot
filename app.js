@@ -94,6 +94,8 @@ function sendGenericMessage(recipientID){
 				matchElements.push(matchObject);
 				console.log("MATCH ELEMENTS ---------");
 				console.log(matchElements);
+				console.log("BUTTON OBJECT -----")
+				console.log(buttons);
 			},match);
 
 		});
