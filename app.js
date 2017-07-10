@@ -174,8 +174,8 @@ function getCurrentMatches(callback){
 			var matchesWithId=todayMatches.filter(function(match){
 				return ((match.unique_id.indexOf('will generate') < 0));
 			});
-			matchesWithId.forEach(function(match){
-				match.matchStarted=true;
+			matchesWithId.forEach(function(matches){
+				matches.matchStarted=true;
 			});
 			console.log(todayMatches);
 			console.log(matchesWithId);
