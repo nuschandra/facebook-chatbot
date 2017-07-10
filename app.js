@@ -178,12 +178,12 @@ function getCurrentMatches(callback){
 			matchesWithId.forEach(function(matches){
 				matches.matchStarted=true;
 			});
-			console.log(todayMatches);
-			console.log(matchesWithId);
+			console.log("TODAY MATCHES - " + todayMatches);
+			console.log("MATCHES WITH ID - " + matchesWithId);
 			var matchesWithNoId=todayMatches.filter(function(match){
 				return (match.unique_id.indexOf('will generate') > -1);
 			});
-			console.log(matchesWithNoId);
+			console.log("MATCHES WITH NO ID - " + matchesWithNoId);
 			if(matchesWithNoId.length>0){
 				getUniqueId(function(newMatches){
 					console.log(newMatches);
