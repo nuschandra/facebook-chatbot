@@ -165,6 +165,7 @@ function getCurrentMatches(callback){
 	},function(error,response,body){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
+			var allCurrentMatches;
 			var today=moment().format('LL');
 			var tmr='14 July 2017'
 			console.log(today);
@@ -189,7 +190,7 @@ function getCurrentMatches(callback){
 			console.log(matchesWithNoId);
 			if(matchesWithNoId.length>0){
 				getUniqueId(function(newMatches){
-					var allCurrentMatches=matchesWithId.concat(newMatches);
+					allCurrentMatches=matchesWithId.concat(newMatches);
 				},matchesWithNoId);
 			}
 			console.log("ALL CURRENT MATCHES ----- ")
