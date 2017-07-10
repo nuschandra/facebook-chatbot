@@ -1,8 +1,8 @@
 {
 	"image_url":{
-		"Sri Lanka vs Zimbabwe":"http://res.cloudinary.com/hqdayur9f/image/upload/v1499665660/SriZim.png",
-		"Zimbabwe vs Sri Lanka":"http://res.cloudinary.com/hqdayur9f/image/upload/v1499665660/SriZim.png",
-		"England vs South Africa":"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSou.png",
-		"South Africa vs England":"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSou.png"
+		"Sri Lanka v Zimbabwe":"http://res.cloudinary.com/hqdayur9f/image/upload/v1499665660/SriZim.png",
+		"Zimbabwe v Sri Lanka":"http://res.cloudinary.com/hqdayur9f/image/upload/v1499665660/SriZim.png",
+		"England v South Africa":"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSou.png",
+		"South Africa v England":"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSou.png"
 	}
 }
