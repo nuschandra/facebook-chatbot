@@ -169,9 +169,9 @@ function getCurrentMatches(callback){
 			console.log(today);
 			var matches=body.data;
 			var currentMatches=matches.filter(function(match){
+				match.matchStarted=true;
 				return (match.date===today);
 			});
-			currentMatches.matchStarted=true;
 			console.log(currentMatches);
 			var matchesWithNoId=currentMatches.filter(function(match){
 				return (match.unique_id.indexOf('will generate') > -1);
