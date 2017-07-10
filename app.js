@@ -6,6 +6,7 @@ var request=require('request');
 var port=3000;
 var fs=require('fs');
 var moment=require('moment');
+var config=require('config');
 require('moment/locale/en-gb')
 
 app.use(bodyParser.json());
@@ -76,12 +77,13 @@ function receivedMessage(event){
 
 function sendGenericMessage(recipientID){
 	getCurrentMatches(function(allCurrentMatches){
-		var elements;
-		allCurrentMatches.forEach(function(match){
+		var matchElements=[];
+		allCurrentMatches.forEach(function(match,index){
 			getMatchDetails(function(matchDetails){
-				var matchTitle=matchDetails.matchTitle;
-				var venue=matchDetails.venue;
-				var seriesInformation=matchDetails.seriesInformation;
+				matchElements[index].title=matchDetails.matchTitle;
+				matchElements[index].subtitle=matchDetails.seriesInformation+ " at "+matchDetails.venue;
+				matchElements[index].image_url=config.get('image_url.'+matchDetails.matchTitle);
+				console.log(matchElements);
 			},match);
 
 		});
@@ -229,14 +231,12 @@ function getUniqueId(callback,matchesWithNoId){
 			//var atString=match.name.indexOf(' at ');
 			//var teamOne=match.name.slice(0,versusString);
 			//var teamTwo=match.name.slice(versusString+3,atString);
-			var teamOne;
-			var teamTwo;
+			var teamOne,teamTwo;
 			getMatchDetails(function(matchDetails){
 				teamOne=matchDetails.teamOne;
 				teamTwo=matchDetails.teamTwo;
 				console.log(teamOne,teamTwo);
 			},match);
-			console.log(teamOne,teamTwo);
 			var filterMatches=matches.filter(function(match){
 				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
