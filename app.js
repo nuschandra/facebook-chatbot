@@ -95,21 +95,35 @@ function sendGenericMessage(recipientID){
 			},match);
 
 		});
-		var messageData={
-			recipient:{
-				id:recipientID
-			},
-			message:{
-				attachment:{
-					type:"template",
-					payload:{
-						template_type:"generic",
-						elements:matchElements
+		if(matchElements.length>0){
+			var messageData={
+				recipient:{
+					id:recipientID
+				},
+				message:{
+					attachment:{
+						type:"template",
+						payload:{
+							template_type:"generic",
+							elements:matchElements
+						}
 					}
 				}
-			}
-		};
-		callSendAPI(messageData);
+			};
+			callSendAPI(messageData);
+		}
+		else{
+			var messageData={
+				recipient:{
+					id:recipientID
+				},
+				message:{
+					text:"There are no ongoing matches!"
+				}
+			};
+			callSendAPI(messageData);
+		}
+		
 	})
 	
 }
