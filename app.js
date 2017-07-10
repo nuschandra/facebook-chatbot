@@ -188,12 +188,13 @@ function getCurrentMatches(callback){
 			console.log("MATCHES WITH NO ID - ");
 			console.log(matchesWithNoId);
 			if(matchesWithNoId.length>0){
-				getUniqueId(function(todayMatches){
-					console.log(todayMatches);
+				getUniqueId(function(newMatches){
+					var allCurrentMatches=matchesWithId.concat(newMatches);
 				},matchesWithNoId);
 			}
-			console.log(todayMatches);
-			callback(todayMatches);
+			console.log("ALL CURRENT MATCHES ----- ")
+			console.log(allCurrentMatches);
+			callback(allCurrentMatches);
 		}
 		else{
 			console.error("Unable to retrieve current matches");
@@ -214,8 +215,6 @@ function getUniqueId(callback,matchesWithNoId){
 				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
 			if(filterMatches.length>0){
-				console.log(filterMatches);
-				console.log(filterMatches[0].unique_id);
 				match.unique_id=filterMatches[0].unique_id;
 				match.matchStarted=filterMatches[0].matchStarted;
 			}
