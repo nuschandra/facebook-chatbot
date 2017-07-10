@@ -108,16 +108,7 @@ function sendGenericMessage(recipientID){
 					type:"template",
 					payload:{
 						template_type:"generic",
-						elements:[{
-							title:"England vs South Africa",
-							subtitle:"1st Test - Day 4",
-							image_url:"http://res.cloudinary.com/hqdayur9f/image/upload/v1499603367/EngSaf.png",
-							buttons:[{
-								type:"postback",
-								title:"Get Scores",
-								payload:"GET_SCORES_PAYLOAD"
-							}]
-						}]
+						elements:matchElements
 					}
 				}
 			}
