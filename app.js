@@ -263,6 +263,7 @@ function getMatchDetails(callback,match){
 	matchDetails.matchTitle=match.name.slice(0,atString);
 	matchDetails.venue=match.name.slice(atString+4,commaString);
 	matchDetails.seriesInformation=match.name.slice(commaString+2,match.name.length);
+	console.log(matchDetails);
 	callback(matchDetails);
 }
 
