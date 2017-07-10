@@ -166,7 +166,7 @@ function getCurrentMatches(callback){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
 			var today=moment().format('LL');
-			var tmr='14 July 2017';
+			var tmr='14 July 2017'
 			console.log(today);
 			var matches=body.data;
 			var todayMatches=matches.filter(function(match){
@@ -192,6 +192,7 @@ function getCurrentMatches(callback){
 					console.log(newMatches);
 				},matchesWithNoId);
 			}
+			console.log(todayMatches);
 			callback(matches);
 		}
 		else{
@@ -210,11 +211,12 @@ function getUniqueId(callback,matchesWithNoId){
 			var teamOne=match.name.slice(0,versusString);
 			var teamTwo=match.name.slice(versusString+3,atString)
 			var filterMatches=matches.filter(function(match){
-				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo) && (match.matchStarted));
+				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
 			console.log(filterMatches);
 			console.log(filterMatches[0].unique_id);
 			match.unique_id=filterMatches[0].unique_id;
+			match.matchStarted=filterMatches[0].matchStarted;
 		});
 		callback(matchesWithNoId);
 	});
