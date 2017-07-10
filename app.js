@@ -190,7 +190,12 @@ function getCurrentMatches(callback){
 			console.log(matchesWithNoId);
 			if(matchesWithNoId.length>0){
 				getUniqueId(function(newMatches){
+					console.log("NEW MATCHES ----- ");
+					console.log(newMatches);
 					allCurrentMatches=matchesWithId.concat(newMatches);
+					console.log("ALL CURRENT MATCHES ----- ")
+					console.log(allCurrentMatches);
+
 				},matchesWithNoId);
 			}
 			console.log("ALL CURRENT MATCHES ----- ")
