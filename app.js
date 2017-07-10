@@ -83,7 +83,7 @@ function sendGenericMessage(recipientID){
 				var venue=matchDetails.venue;
 				var seriesInformation=matchDetails.seriesInformation;
 			},match);
-			
+
 		});
 		var messageData={
 			recipient:{
@@ -251,6 +251,7 @@ function getUniqueId(callback,matchesWithNoId){
 }
 
 function getMatchDetails(callback,match){
+	var matchDetails;
 	var versusString=match.name.indexOf(' v ');
 	var atString=match.name.indexOf(' at ');
 	var commaString=match.name.indexOf(', ');
