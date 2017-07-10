@@ -166,7 +166,6 @@ function getCurrentMatches(callback){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
 			var today=moment().format('LL');
-			console.log(time);
 			console.log(today);
 			var matches=body.data;
 			var currentMatches=matches.filter(function(match){
