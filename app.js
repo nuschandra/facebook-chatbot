@@ -7,7 +7,7 @@ var port=3000;
 var fs=require('fs');
 var moment=require('moment');
 var config=require('config');
-require('moment/locale/en')
+require('moment/locale/en-ca')
 
 app.use(bodyParser.json());
 
