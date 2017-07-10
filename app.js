@@ -168,12 +168,18 @@ function getCurrentMatches(callback){
 			var today=moment().format('LL');
 			console.log(today);
 			var matches=body.data;
-			var currentMatches=matches.filter(function(match){
-				match.matchStarted=true;
+			var todayMatches=matches.filter(function(match){
 				return (match.date===today);
 			});
-			console.log(currentMatches);
-			var matchesWithNoId=currentMatches.filter(function(match){
+			var matchesWithId=todayMatches.filter(function(match){
+				return ((match.unique_id.indexOf('will generate') < 0);)
+			});
+			matchesWithId.forEach(function(match){
+				match.matchStarted=true;
+			})
+			console.log(todayMatches);
+			console.log(matchesWithId);
+			var matchesWithNoId=todayMatches.filter(function(match){
 				return (match.unique_id.indexOf('will generate') > -1);
 			});
 			console.log(matchesWithNoId);
