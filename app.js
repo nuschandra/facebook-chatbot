@@ -172,11 +172,11 @@ function getCurrentMatches(callback){
 				return (match.date===today);
 			});
 			var matchesWithId=todayMatches.filter(function(match){
-				return ((match.unique_id.indexOf('will generate') < 0);)
+				return ((match.unique_id.indexOf('will generate') < 0));
 			});
 			matchesWithId.forEach(function(match){
 				match.matchStarted=true;
-			})
+			});
 			console.log(todayMatches);
 			console.log(matchesWithId);
 			var matchesWithNoId=todayMatches.filter(function(match){
