@@ -75,7 +75,16 @@ function receivedMessage(event){
 }
 
 function sendGenericMessage(recipientID){
-	getCurrentMatches(function(message){
+	getCurrentMatches(function(allCurrentMatches){
+		var elements;
+		allCurrentMatches.forEach(function(match){
+			getMatchDetails(function(matchDetails){
+				var matchTitle=matchDetails.matchTitle;
+				var venue=matchDetails.venue;
+				var seriesInformation=matchDetails.seriesInformation;
+			},match);
+			
+		});
 		var messageData={
 			recipient:{
 				id:recipientID
@@ -195,7 +204,10 @@ function getCurrentMatches(callback){
 					allCurrentMatches=matchesWithId.concat(newMatches);
 					console.log("ALL CURRENT MATCHES ----- ")
 					console.log(allCurrentMatches);
-					callback(allCurrentMatches);
+					var startedMatches=allCurrentMatches.filter(function(match){
+						return (match.matchStarted);
+					});
+					callback(startedMatches);
 				},matchesWithNoId);
 			}
 			else{
@@ -213,10 +225,15 @@ function getCurrentMatches(callback){
 function getUniqueId(callback,matchesWithNoId){
 	getUpcomingMatches(function(matches){
 		matchesWithNoId.forEach(function(match){
-			var versusString=match.name.indexOf(' v ');
-			var atString=match.name.indexOf(' at ');
-			var teamOne=match.name.slice(0,versusString);
-			var teamTwo=match.name.slice(versusString+3,atString)
+			//var versusString=match.name.indexOf(' v ');
+			//var atString=match.name.indexOf(' at ');
+			//var teamOne=match.name.slice(0,versusString);
+			//var teamTwo=match.name.slice(versusString+3,atString);
+			getMatchDetails(function(matchDetails){
+				var teamOne=matchDetails.teamOne;
+				var teamTwo=matchDetails.teamTwo;
+				console.log(teamOne,teamTwo);
+			},match);
 			var filterMatches=matches.filter(function(match){
 				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
 			});
@@ -233,6 +250,17 @@ function getUniqueId(callback,matchesWithNoId){
 	
 }
 
+function getMatchDetails(callback,match){
+	var versusString=match.name.indexOf(' v ');
+	var atString=match.name.indexOf(' at ');
+	var commaString=match.name.indexOf(', ');
+	matchDetails.teamOne=match.name.slice(0,versusString);
+	matchDetails.teamTwo=match.name.slice(versusString+3,atString);
+	matchDetails.matchTitle=match.name.slice(0,atString);
+	matchDetails.venue=match.name.slice(atString+4,commaString);
+	matchDetails.seriesInformation=match.name.slice(commaString+2,match.name.length);
+	callback(matchDetails);
+}
 
 function callSendAPI(messageData){
 	request({
