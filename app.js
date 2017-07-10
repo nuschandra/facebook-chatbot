@@ -166,23 +166,23 @@ function getCurrentMatches(callback){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
 			var today=moment().format('LL');
-			var time=moment().format('LT');
 			console.log(time);
 			console.log(today);
 			var matches=body.data;
 			var currentMatches=matches.filter(function(match){
-				return (match.date==='10 July 2017');
+				return (match.date===today);
 			});
+			currentMatches.matchStarted=true;
+			console.log(currentMatches);
 			var matchesWithNoId=currentMatches.filter(function(match){
 				return (match.unique_id.indexOf('will generate') > -1);
 			});
 			console.log(matchesWithNoId);
-			getUniqueId(function(newMatches){
-				console.log(newMatches);
-			},matchesWithNoId);
-			//console.log(matches);
-			//console.log(matches)
-			//console.log(newMatches);
+			if(matchesWithNoId.length>0){
+				getUniqueId(function(newMatches){
+					console.log(newMatches);
+				},matchesWithNoId);
+			}
 			callback(matches);
 		}
 		else{
@@ -201,7 +201,7 @@ function getUniqueId(callback,matchesWithNoId){
 			var teamOne=match.name.slice(0,versusString);
 			var teamTwo=match.name.slice(versusString+3,atString)
 			var filterMatches=matches.filter(function(match){
-				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo));
+				return ((match["team-1"]===teamOne || match["team-1"]===teamTwo) && (match["team-2"]===teamOne || match["team-2"]===teamTwo) && (match.matchStarted));
 			});
 			console.log(filterMatches);
 			console.log(filterMatches[0].unique_id);
