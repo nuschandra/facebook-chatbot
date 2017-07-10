@@ -166,10 +166,11 @@ function getCurrentMatches(callback){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
 			var today=moment().format('LL');
+			var tmr='14 July 2017';
 			console.log(today);
 			var matches=body.data;
 			var todayMatches=matches.filter(function(match){
-				return (match.date===today);
+				return (match.date===today && match.date===tmr);
 			});
 			var matchesWithId=todayMatches.filter(function(match){
 				return ((match.unique_id.indexOf('will generate') < 0));
