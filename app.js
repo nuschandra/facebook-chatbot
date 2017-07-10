@@ -264,6 +264,7 @@ function getMatchDetails(callback,match){
 	matchDetails.venue=match.name.slice(atString+4,commaString);
 	matchDetails.seriesInformation=match.name.slice(commaString+2,match.name.length);
 	console.log(matchDetails);
+	console.log(matchDetails[2]);
 	callback(matchDetails);
 }
 
