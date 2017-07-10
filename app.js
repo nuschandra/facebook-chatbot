@@ -228,8 +228,11 @@ function getUniqueId(callback,matchesWithNoId){
 				match.matchStarted=false;
 			}
 		});
-		callback(matchesWithNoId);
+		
 	});
+	console.log("TESTING A SCENARIO HERE ---------")
+	console.log(matchesWithNoId);
+	callback(matchesWithNoId);
 }
 
 
