@@ -7,7 +7,7 @@ var port=3000;
 var fs=require('fs');
 var moment=require('moment');
 var config=require('config');
-require('moment/locale/en-ca')
+require('moment/locale/en-gb')
 
 app.use(bodyParser.json());
 
@@ -191,8 +191,6 @@ function getCurrentMatches(callback){
 		if(!error && response.statusCode==200){
 			var today=moment().format('LL');
 			console.log(today);
-			console.log(moment.locale());
-			console.log(moment().format('LT'));
 			var matches=body.data;
 			var todayMatches=matches.filter(function(match){
 				return (match.date===today);
