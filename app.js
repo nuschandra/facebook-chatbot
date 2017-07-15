@@ -91,6 +91,9 @@ function sendGenericMessage(recipientID){
 			buttons.push(buttonObject);
 			matchObject.buttons=buttons;
 			matchElements.push(matchObject);
+			if(index===9){
+				break;
+			}
 		});
 		console.log(matchElements);
 		if(matchElements.length>0){
