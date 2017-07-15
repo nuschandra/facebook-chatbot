@@ -87,11 +87,12 @@ function sendGenericMessage(recipientID){
 			var buttonObject={};
 			buttonObject.type="postback";
 			buttonObject.title="Get Scores";
-			buttonObject.payload="PAYLOAD_"+match.unique_id;
+			buttonObject.payload="PAYLOAD_"+match.MATCH_ID
 			buttons.push(buttonObject);
 			matchObject.buttons=buttons;
 			matchElements.push(matchObject);
 		});
+		console.log(matchElements);
 		if(matchElements.length>0){
 			var messageData={
 				recipient:{
