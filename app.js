@@ -80,20 +80,17 @@ function sendGenericMessage(recipientID){
 		var matchElements=[];
 		allCurrentMatches.forEach(function(match,index){
 			var matchObject={};
-			getMatchDetails(function(matchDetails){
-				matchObject.title=matchDetails.matchTitle;
-				matchObject.subtitle=matchDetails.seriesInformation+ " at "+matchDetails.venue;
-				matchObject.image_url=config.get('image_url.'+matchDetails.matchTitle);
-				var buttons=[];
-				var buttonObject={};
-				buttonObject.type="postback";
-				buttonObject.title="Get Scores";
-				buttonObject.payload="PAYLOAD_"+match.unique_id;
-				buttons.push(buttonObject);
-				matchObject.buttons=buttons;
-				matchElements.push(matchObject);
-			},match);
-
+			matchObject.title=match.TEAM_1+" vs "+match.TEAM_2;
+			matchObject.subtitle=match.MATCH_DETAILS+"\n"+match.MATCH_STATUS;
+			//matchObject.image_url=config.get('image_url.'+matchDetails.matchTitle);
+			var buttons=[];
+			var buttonObject={};
+			buttonObject.type="postback";
+			buttonObject.title="Get Scores";
+			buttonObject.payload="PAYLOAD_"+match.unique_id;
+			buttons.push(buttonObject);
+			matchObject.buttons=buttons;
+			matchElements.push(matchObject);
 		});
 		if(matchElements.length>0){
 			var messageData={
