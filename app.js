@@ -181,7 +181,7 @@ function getUpcomingMatches(callback){
 function getCurrentMatches(callback){
 	request({
 		uri:'https://cricket-api-info.herokuapp.com/currentMatches',
-		method:'GET',
+		method:'GET'
 	},function(error,response,body){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
