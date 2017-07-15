@@ -90,6 +90,8 @@ function sendGenericMessage(recipientID){
 			else if(i===1){
 				matchList=allCurrentMatches.slice(10,allCurrentMatches.length-1)
 			}
+			console.log(allCurrentMatches);
+			console.log(matchList);
 			var matchElements=[];
 			matchList.some(function(match,index){
 				var matchObject={};
@@ -105,7 +107,7 @@ function sendGenericMessage(recipientID){
 				matchObject.buttons=buttons;
 				matchElements.push(matchObject);
 			});
-			console.log(matchElements);
+			//console.log(matchElements);
 			if(matchElements.length>0){
 				var messageData={
 					recipient:{
@@ -198,8 +200,8 @@ function getCurrentMatches(callback){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
 			var matches=body;
-			console.log("TODAY MATCHES - ");
-			console.log(matches);
+			//console.log("TODAY MATCHES - ");
+			//console.log(matches);
 			callback(matches);
 		}
 		else{
