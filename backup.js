@@ -179,16 +179,54 @@ function getUpcomingMatches(callback){
 }
 //&& match.unique_id.indexOf('will generate') < 0
 function getCurrentMatches(callback){
+	var currentMatchesData={
+		apikey:"qMdsykxRTkft5pvwqdaqOI8D6Sm2"
+	};
 	request({
-		uri:'https://cricket-api-info.herokuapp.com/currentMatches',
-		method:'GET',
+		uri:'http://cricapi.com/api/matchCalendar',
+		method:'POST',
+		json:currentMatchesData
 	},function(error,response,body){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
+			var today=moment().format('LL');
+			console.log(today);
 			var matches=body.data;
+			var todayMatches=matches.filter(function(match){
+				return (match.date===today);
+			});
+			var matchesWithId=todayMatches.filter(function(match){
+				return ((match.unique_id.indexOf('will generate') < 0));
+			});
+			matchesWithId.forEach(function(matches){
+				matches.matchStarted=true;
+			});
 			console.log("TODAY MATCHES - ");
-			console.log(matches);
-			callback(matches);
+			console.log(todayMatches);
+			console.log("MATCHES WITH ID - ");
+			console.log(matchesWithId);
+			var allCurrentMatches=matchesWithId;
+			var matchesWithNoId=todayMatches.filter(function(match){
+				return (match.unique_id.indexOf('will generate') > -1);
+			});
+			console.log("MATCHES WITH NO ID - ");
+			console.log(matchesWithNoId);
+			if(matchesWithNoId.length>0){
+				getUniqueId(function(newMatches){
+					console.log("NEW MATCHES ----- ");
+					console.log(newMatches);
+					allCurrentMatches=matchesWithId.concat(newMatches);
+					console.log("ALL CURRENT MATCHES ----- ")
+					console.log(allCurrentMatches);
+					var startedMatches=allCurrentMatches.filter(function(match){
+						return (match.matchStarted);
+					});
+					callback(startedMatches);
+				},matchesWithNoId);
+			}
+			else{
+				callback(allCurrentMatches);
+			}
 		}
 		else{
 			console.error("Unable to retrieve current matches");
