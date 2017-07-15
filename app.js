@@ -77,52 +77,63 @@ function receivedMessage(event){
 
 function sendGenericMessage(recipientID){
 	getCurrentMatches(function(allCurrentMatches){
-		var matchElements=[];
-		allCurrentMatches.some(function(match,index){
-			var matchObject={};
-			matchObject.title=match.TEAM_1+" vs "+match.TEAM_2;
-			matchObject.subtitle=match.MATCH_DETAILS+"\n"+match.MATCH_STATUS;
-			//matchObject.image_url=config.get('image_url.'+matchDetails.matchTitle);
-			var buttons=[];
-			var buttonObject={};
-			buttonObject.type="postback";
-			buttonObject.title="Get Scores";
-			buttonObject.payload="PAYLOAD_"+match.MATCH_ID
-			buttons.push(buttonObject);
-			matchObject.buttons=buttons;
-			matchElements.push(matchObject);
-			return index===9;
-		});
-		console.log(matchElements);
-		if(matchElements.length>0){
-			var messageData={
-				recipient:{
-					id:recipientID
-				},
-				message:{
-					attachment:{
-						type:"template",
-						payload:{
-							template_type:"generic",
-							elements:matchElements
+		var arraySlices=1;
+		var matchList=[];
+		if(allCurrentMatches.length>10){
+			arraySlices=2;
+		}
+		for (var i = 0; i < arraySlices; i++) {
+			if(i===0){
+				matchList=allCurrentMatches.slice(0,9);
+			}
+			else if(i===1){
+				matchList=allCurrentMatches.slice(10,allCurrentMatches.length-1)
+			}
+			var matchElements=[];
+			matchList.some(function(match,index){
+				var matchObject={};
+				matchObject.title=match.TEAM_1+" vs "+match.TEAM_2;
+				matchObject.subtitle=match.MATCH_DETAILS+"\n"+match.MATCH_STATUS;
+				//matchObject.image_url=config.get('image_url.'+matchDetails.matchTitle);
+				var buttons=[];
+				var buttonObject={};
+				buttonObject.type="postback";
+				buttonObject.title="Get Scores";
+				buttonObject.payload="PAYLOAD_"+match.MATCH_ID
+				buttons.push(buttonObject);
+				matchObject.buttons=buttons;
+				matchElements.push(matchObject);
+			});
+			console.log(matchElements);
+			if(matchElements.length>0){
+				var messageData={
+					recipient:{
+						id:recipientID
+					},
+					message:{
+						attachment:{
+							type:"template",
+							payload:{
+								template_type:"generic",
+								elements:matchElements
+							}
 						}
 					}
-				}
-			};
-			callSendAPI(messageData);
-		}
-		else{
-			var messageData={
-				recipient:{
-					id:recipientID
-				},
-				message:{
-					text:"There are no ongoing matches!"
-				}
-			};
-			callSendAPI(messageData);
-		}
-		
+				};
+				callSendAPI(messageData);
+			}
+			else{
+				var messageData={
+					recipient:{
+						id:recipientID
+					},
+					message:{
+						text:"There are no ongoing matches!"
+					}
+				};
+				callSendAPI(messageData);
+			}
+		}		
 	})
 	
 }
