@@ -78,7 +78,7 @@ function receivedMessage(event){
 function sendGenericMessage(recipientID){
 	getCurrentMatches(function(allCurrentMatches){
 		var matchElements=[];
-		allCurrentMatches.forEach(function(match,index){
+		allCurrentMatches.some(function(match,index){
 			var matchObject={};
 			matchObject.title=match.TEAM_1+" vs "+match.TEAM_2;
 			matchObject.subtitle=match.MATCH_DETAILS+"\n"+match.MATCH_STATUS;
@@ -91,9 +91,7 @@ function sendGenericMessage(recipientID){
 			buttons.push(buttonObject);
 			matchObject.buttons=buttons;
 			matchElements.push(matchObject);
-			if(index===9){
-				break;
-			}
+			return index===9;
 		});
 		console.log(matchElements);
 		if(matchElements.length>0){
