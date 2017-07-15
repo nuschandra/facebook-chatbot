@@ -85,10 +85,10 @@ function sendGenericMessage(recipientID){
 		}
 		for (var i = 0; i < arraySlices; i++) {
 			if(i===0){
-				matchList=allCurrentMatches.slice(0,9);
+				matchList=allCurrentMatches.slice(0,10);
 			}
 			else if(i===1){
-				matchList=allCurrentMatches.slice(10,allCurrentMatches.length-1)
+				matchList=allCurrentMatches.slice(10,allCurrentMatches.length)
 			}
 			console.log(allCurrentMatches);
 			console.log(matchList);
