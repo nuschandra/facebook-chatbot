@@ -79,6 +79,7 @@ function sendGenericMessage(recipientID){
 	getCurrentMatches(function(allCurrentMatches){
 		var arraySlices=1;
 		var matchList=[];
+		console.log(allCurrentMatches.length)
 		if(allCurrentMatches.length>10){
 			arraySlices=2;
 		}
