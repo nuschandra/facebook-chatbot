@@ -186,7 +186,7 @@ function getCurrentMatches(callback){
 	},function(error,response,body){
 		//console.log(body.matches[0].unique_id);
 		if(!error && response.statusCode==200){
-			var matches=body.data;
+			var matches=body;
 			console.log("TODAY MATCHES - ");
 			console.log(matches);
 			callback(matches);
