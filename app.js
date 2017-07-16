@@ -75,8 +75,8 @@ function receivedMessage(event){
 	}
 }
 
-function sendGenericMessage(recipientID){
-	getCurrentMatches(function(allCurrentMatches){
+function sendGenericMessage(payload,recipientID){
+	getCurrentMatches(payload,function(allCurrentMatches){
 		var arraySlices=1;
 		var matchList=[];
 		console.log(allCurrentMatches.length)
@@ -191,9 +191,10 @@ function getUpcomingMatches(callback){
 	});
 }
 //&& match.unique_id.indexOf('will generate') < 0
-function getCurrentMatches(callback){
+function getCurrentMatches(payload,callback){
 	request({
 		uri:'https://cricket-api-info.herokuapp.com/currentMatches',
+		qs:{matchType:payload},
 		method:'GET',
 		json:true
 	},function(error,response,body){
@@ -287,8 +288,8 @@ function receivedPostback(event){
 	if(payload==='GET_STARTED_PAYLOAD'){
 		sendReply(senderID,"Welcome to TestSports! Select an option from the below menu.");
 	}
-	if(payload==='CURRENT_INTERNATIONAL_PAYLOAD'){
-		sendGenericMessage(senderID);
+	if(payload==='INTERNATIONALS'){
+		sendGenericMessage(payload,senderID);
 	}
 
 }
