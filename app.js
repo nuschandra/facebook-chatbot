@@ -97,7 +97,7 @@ function sendGenericMessage(payload,recipientID){
 				var matchObject={};
 				matchObject.title=match.TEAM_1+" vs "+match.TEAM_2;
 				matchObject.subtitle=match.MATCH_DETAILS+"\n"+match.MATCH_STATUS;
-				//matchObject.image_url=config.get('image_url.'+matchDetails.matchTitle);
+				matchObject.image_url=config.get('image_url.'+matchDetails.matchTitle);
 				var buttons=[];
 				var buttonObject={};
 				buttonObject.type="postback";
