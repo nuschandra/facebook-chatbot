@@ -77,19 +77,17 @@ function receivedMessage(event){
 
 function sendGenericMessage(payload,recipientID){
 	getCurrentMatches(payload,function(allCurrentMatches){
+		var noOfMatches=allCurrentMatches.length;
 		var arraySlices=1;
 		var matchList=[];
 		console.log(allCurrentMatches.length)
 		if(allCurrentMatches.length>10){
-			arraySlices=2;
+			arraySlices=ceil(noOfMatches/10);
 		}
-		for (var i = 0; i < arraySlices; i++) {
-			if(i===0){
-				matchList=allCurrentMatches.slice(0,10);
-			}
-			else if(i===1){
-				matchList=allCurrentMatches.slice(10,allCurrentMatches.length)
-			}
+		var chunks=10;
+		for (var i = 0; i < (arraySlices*10); i+chunks) {
+			matchList=allCurrentMatches.slice(i,i+chunks);
+			
 			console.log(allCurrentMatches);
 			console.log(matchList);
 			var matchElements=[];
