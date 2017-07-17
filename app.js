@@ -82,7 +82,7 @@ function sendGenericMessage(payload,recipientID){
 		var matchList=[];
 		console.log(allCurrentMatches.length)
 		if(allCurrentMatches.length>10){
-			arraySlices=ceil(noOfMatches/10);
+			arraySlices=Math.ceil(noOfMatches/10);
 		}
 		var chunks=10;
 		for (var i = 0; i < (arraySlices*10); i+chunks) {
