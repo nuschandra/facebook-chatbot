@@ -97,7 +97,7 @@ function sendGenericMessage(payload,recipientID){
 				var matchObject={};
 				matchObject.title=match.TEAM_1+" vs "+match.TEAM_2;
 				matchObject.subtitle=match.MATCH_DETAILS+"\n"+match.MATCH_STATUS;
-				matchObject.image_url=config.get('image_url.'+matchObject.title);
+				//matchObject.image_url=config.get('image_url.'+matchObject.title);
 				var buttons=[];
 				var buttonObject={};
 				buttonObject.type="postback";
@@ -289,6 +289,15 @@ function receivedPostback(event){
 		sendReply(senderID,"Welcome to TestSports! Select an option from the below menu.");
 	}
 	if(payload==='INTERNATIONALS'){
+		sendGenericMessage(payload,senderID);
+	}
+	if(payload==='DOMESTIC'){
+		sendGenericMessage(payload,senderID);
+	}
+	if(payload==='WOMEN'){
+		sendGenericMessage(payload,senderID);
+	}
+	if(payload==='OTHERS'){
 		sendGenericMessage(payload,senderID);
 	}
 
