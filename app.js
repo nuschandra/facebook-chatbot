@@ -85,7 +85,7 @@ function sendGenericMessage(payload,recipientID){
 			arraySlices=Math.ceil(noOfMatches/10);
 		}
 		var chunks=10;
-		for (var i = 0; i < (arraySlices*10); i+chunks) {
+		for (var i = 0; i < (arraySlices*10); i+=chunks) {
 			matchList=allCurrentMatches.slice(i,i+chunks);
 			
 			console.log(allCurrentMatches);
