@@ -95,12 +95,11 @@ function sendGenericMessage(payload,recipientID){
 				var matchObject={};
 				var teamOne=match.TEAM_1;
 				var teamTwo=match.TEAM_2;
-				console.log(match.TEAM_1.indexOf(' Women'));
 				if(match.TEAM_1.indexOf(' Women')!==-1){
-					match.TEAM_1.replace(' Women','');
+					match.TEAM_1=match.TEAM_1.replace(' Women','');
 				}
 				if(match.TEAM_2.indexOf(' Women')!==-1){
-					match.TEAM_2.replace(' Women','');
+					match.TEAM_2=match.TEAM_2.replace(' Women','');
 				}
 				matchObject.title=teamOne+" vs "+teamTwo;
 				var matchDetails=match.MATCH_DETAILS;
