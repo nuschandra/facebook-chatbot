@@ -97,7 +97,7 @@ function sendGenericMessage(payload,recipientID){
 				matchObject.subtitle=match.MATCH_DETAILS+"\n"+match.MATCH_STATUS;
 				if (payload==='INTERNATIONALS'){
 					var title=matchObject.title;
-					matchObject.image_url=config.get(payload.title);
+					matchObject.image_url=config.get(payload+"."+title);
 				}
 				else{
 					matchObject.image_url=config.get(payload);
