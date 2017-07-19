@@ -94,7 +94,15 @@ function sendGenericMessage(payload,recipientID){
 			matchList.some(function(match,index){
 				var matchObject={};
 				matchObject.title=match.TEAM_1+" vs "+match.TEAM_2;
-				matchObject.subtitle=match.MATCH_DETAILS+"\n"+match.MATCH_STATUS;
+				var matchDetails=match.MATCH_DETAILS;
+				var matchStatus=match.MATCH_STATUS;
+				matchObject.subtitle=matchDetails;
+				if (matchStatus=='None'){
+					matchObject.subtitle=matchDetails+"\n"+'N/A';
+				}
+				else{
+					matchObject.subtitle=matchDetails+"\n"+matchStatus;
+				}
 				if (payload==='INTERNATIONALS'){
 					var title=matchObject.title;
 					matchObject.image_url=config.get(payload+"."+title);
