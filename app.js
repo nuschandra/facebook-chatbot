@@ -100,7 +100,7 @@ function sendGenericMessage(payload,recipientID){
 					matchObject.image_url=config.get(payload+"."+title);
 				}
 				else if (payload==='DOMESTIC'){
-					matchObject.image_url=config.get(payload+"."+matchObject.COUNTRY_NAME);
+					matchObject.image_url=config.get(payload+"."+match.COUNTRY_NAME);
 				}
 				else{
 					matchObject.image_url=config.get(payload);
