@@ -93,6 +93,12 @@ function sendGenericMessage(payload,recipientID){
 			var matchElements=[];
 			matchList.some(function(match,index){
 				var matchObject={};
+				if(match.TEAM_1.indexOf(" Women")!==-1){
+					match.TEAM_1.replace(" Women","");
+				}
+				if(match.TEAM_2.indexOf(" Women")!==-1){
+					match.TEAM_2.replace(" Women","");
+				}
 				matchObject.title=match.TEAM_1+" vs "+match.TEAM_2;
 				var matchDetails=match.MATCH_DETAILS;
 				var matchStatus=match.MATCH_STATUS;
@@ -103,9 +109,9 @@ function sendGenericMessage(payload,recipientID){
 				else{
 					matchObject.subtitle=matchDetails+"\n"+matchStatus;
 				}
-				if (payload==='INTERNATIONALS'){
+				if (payload==='INTERNATIONALS' || payload==='WOMEN'){
 					var title=matchObject.title;
-					matchObject.image_url=config.get(payload+"."+title);
+					matchObject.image_url=config.get('INTERNATIONALS'+"."+title);
 				}
 				else if (payload==='DOMESTIC'){
 					matchObject.image_url=config.get(payload+"."+match.COUNTRY_NAME);
