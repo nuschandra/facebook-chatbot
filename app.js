@@ -99,6 +99,9 @@ function sendGenericMessage(payload,recipientID){
 					var title=matchObject.title;
 					matchObject.image_url=config.get(payload+"."+title);
 				}
+				else if (payload==='DOMESTIC'){
+					matchObject.image_url=config.get(payload+"."+matchObject.COUNTRY_NAME);
+				}
 				else{
 					matchObject.image_url=config.get(payload);
 				}
