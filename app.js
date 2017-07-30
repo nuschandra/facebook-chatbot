@@ -123,9 +123,9 @@ function sendGenericMessage(payload,recipientID){
 				}
 				var buttons=[];
 				var buttonObject={};
-				buttonObject.type="postback";
+				buttonObject.type="web_url";
 				buttonObject.title="Get Scores";
-				buttonObject.payload="PAYLOAD_"+match.MATCH_ID
+				buttonObject.url="https://cricket-api-info.herokuapp.com/currentScores?id=1031441";
 				buttons.push(buttonObject);
 				matchObject.buttons=buttons;
 				matchElements.push(matchObject);
@@ -163,6 +163,7 @@ function sendGenericMessage(payload,recipientID){
 	})
 	
 }
+
 function sendReply(recipientID,messageText){
 	var messageData={
 			recipient:{
@@ -323,7 +324,6 @@ function receivedPostback(event){
 	if(payload==='OTHERS'){
 		sendGenericMessage(payload,senderID);
 	}
-
 }
 
 app.listen(process.env.PORT,function(){
