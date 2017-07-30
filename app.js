@@ -126,6 +126,7 @@ function sendGenericMessage(payload,recipientID){
 				buttonObject.type="web_url";
 				buttonObject.title="Get Scores";
 				buttonObject.url="https://cricket-api-info.herokuapp.com/currentScores?id=1031441";
+				buttonObject.webview_height_ratio="compact";
 				buttons.push(buttonObject);
 				matchObject.buttons=buttons;
 				matchElements.push(matchObject);
